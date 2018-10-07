@@ -1,0 +1,10 @@
+{% extends "ontology/header.html" %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data" action="details.html">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" onclick="">Submit</button>
+</form>
+{% endblock %}
