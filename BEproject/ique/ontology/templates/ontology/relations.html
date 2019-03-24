@@ -1,0 +1,184 @@
+{% extends "ontology/header.html" %}
+
+{% block content %}
+
+<script>
+    var n_id = 0;
+    var dataset = {
+                "nodes": [],
+                "edges": []
+            };
+</script>
+{% for item in nodes %}
+<script>
+
+     var nodes = {};
+     nodes.node_id = n_id;
+     nodes.name = "{{ item }}".toLowerCase();
+     nodes.synonym = "";
+     dataset.nodes.push(nodes);
+     n_id++;
+
+
+</script>
+{% endfor %}
+
+
+
+<form method="POST" enctype="multipart/form-data" class = "main1" id = "form1">
+    <b>Enter node details:</b>
+    <br>
+    <div class = "block" id = "node_1">
+        Node name(concept):<select name = "name">
+            {% for item in nodes %}
+                <option value = "{{ item }}" >{{ item }}</option>
+            {% endfor %}
+        </select>
+
+        Synonyms: <input type = "text" name="synonym">
+    </div>
+
+    <div class="del" > Delete</div>
+    <div class = "add-more">Add synonyms</div>
+    <hr>
+</form>
+
+<form method="POST" enctype="multipart/form-data" class = "main2" id = "form2">
+    <b>Enter relation details:</b>
+    <br>
+    <div class = "rell" id = "rel_1" >
+        Enter source node:<select name = "source">
+            {% for item in nodes %}
+                <option value = "{{ item }}">{{ item }}</option>
+            {% endfor %}
+        </select>
+
+        Enter outgoing relations:<select name = "relation">
+            <option value = "hasSubclass">hasSubclass</option>
+            <option value = "hasApplication">hasApplication</option>
+            <option value = "hasRepresentation">hasRepresentation</option>
+            <option value = "hasOperation">hasOperation</option>
+            <option value = "isA">isA</option>
+        </select>
+
+        Enter destination node:<select name = "destination">
+            {% for item in nodes %}
+                <option value = "{{ item }}">{{ item }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="del2" > Delete</div>
+    <div class = "add-rell">Add more relations</div>
+    <br><br>
+</form>
+
+<a class= "make_onto" href="{% url 'graph' %}" >Make ontology</a>
+
+<p id="hey"></p>
+
+<script>
+   // document.getElementById("hey").innerHTML = JSON.stringify(dataset);
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type = "text/javascript">
+
+    function storeUserDataInSession(jsonObj) {
+        window.sessionStorage.setItem('userObject',jsonObj);
+    }
+
+    $(document).ready(function() {
+        var node_count = 0;
+        var edge_count = 0;
+
+        $(".add-more").click(function() {
+            node_count++;
+            var $self = $(this),
+                $element_to_clone = $self.prev().prev(),
+                $new_element = $element_to_clone.clone();
+            $($new_element).attr("id", 'node_' + node_count);
+
+            $self.prev().show();
+
+            $new_element.insertAfter($element_to_clone).find("input[type='text']").val("");
+
+            return false;
+        });
+
+        $(".add-rell").click(function() {
+            edge_count++;
+            var $self = $(this),
+                $element_to_clone = $self.prev().prev(),
+                $new_element = $element_to_clone.clone();
+            $($new_element).attr("id", 'edge_' + edge_count);
+            $self.prev().show();
+
+            $new_element.insertAfter($element_to_clone).find("input[type='text']").val("");
+            return false;
+        });
+
+        $(".del").click(function() {
+            var $self = $(this),
+            $element_to_remove = $self.prev();
+            $element_to_remove.remove();
+
+        });
+
+        $(".del2").click(function() {
+            var $self = $(this),
+            $element_to_remove = $self.prev();
+            $element_to_remove.remove();
+
+        });
+
+        $(".make_onto").click(function() {
+
+            var formData1 = JSON.stringify($("#form1").serializeArray());
+            var formData2 = JSON.stringify($("#form2").serializeArray());
+            var myData1 = JSON.parse(formData1);
+            var myData2 = JSON.parse(formData2);
+
+
+
+
+            for (var i = 0; i < myData1.length; i++) {
+                if(i%2==0) {
+                    for(var j=0 ; j<dataset.nodes.length ; j++) {
+                        if(myData1[i].value.toLowerCase() == dataset.nodes[j].name) {
+                            dataset.nodes[j].synonym = myData1[i+1].value.toLowerCase();
+                        }
+                    }
+                }
+            }
+
+            var edge_id = 0;
+            for(i = 0; i <myData2.length; i++) {
+                if(i%3==0) {
+                    var edges = {};
+                    edges.edge_id = edge_id;
+                    for(var j = 0; j < dataset.nodes.length ; j++) {
+                        if(myData2[i].value.toLowerCase() == dataset.nodes[j].name) {
+                            edges.source = dataset.nodes[j].node_id;
+                        }
+                        if(myData2[i+2].value.toLowerCase() == dataset.nodes[j].name) {
+                            edges.target = dataset.nodes[j].node_id;
+                        }
+                    }
+                    edges.relation = myData2[i+1].value;
+                    dataset.edges.push(edges);
+                    edge_id++;
+                }
+            }
+            jsonObj = JSON.stringify(dataset);
+            //document.getElementById("hey").innerHTML = jsonObj;
+            storeUserDataInSession(jsonObj);
+
+        });
+
+
+    });
+</script>
+
+{% endblock %}

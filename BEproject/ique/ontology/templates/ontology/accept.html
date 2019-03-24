@@ -2,9 +2,14 @@
 
 {% block content %}
 
-<form method="POST" enctype="multipart/form-data" action="details.html">
+<form method="POST" enctype="multipart/form-data" action = "/iquee/relations/">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" onclick="">Submit</button>
+    Enter course name: <input type="text" name="course">
+    <br>
+    Enter concepts file: <input type="file" name="concepts">
+    <br>
+    <button type="submit">Submit</button>
+    <br>
 </form>
+
 {% endblock %}

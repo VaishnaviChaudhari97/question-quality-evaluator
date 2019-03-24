@@ -1,5 +1,0 @@
-﻿Demonstrate the working of linked list
-list different types of stacks
-implement stack using linked list
-compare the performance of stacks and queues
-implement queue using array

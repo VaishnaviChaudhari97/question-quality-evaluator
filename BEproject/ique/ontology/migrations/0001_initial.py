@@ -16,7 +16,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('course', models.CharField(max_length=50)),
-                ('los', models.FileField(upload_to='files/')),
+                ('owl', models.FileField(upload_to='files/owl')),
+                ('los', models.FileField(upload_to='files/los')),
+                ('ai', models.FileField(upload_to='files/ai')),
+
             ],
         ),
     ]

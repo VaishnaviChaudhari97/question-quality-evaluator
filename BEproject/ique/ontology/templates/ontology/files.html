@@ -1,0 +1,15 @@
+{% extends "ontology/header.html" %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data" action = "/iquee/evaluation/">
+    {% csrf_token %}
+    Insert LOs file :<input type="file" name="LO_file">
+    <br>
+    Insert Questions file :<input type="file" name="questions_file">
+    <br>
+    <button type="submit">Submit</button>
+    <br>
+</form>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "ontology/header.html" %}
+
+{% block content %}
+
+<h5>LIST OF ONTOLOGIES </h5>
+
+1. Data Structure<br><a href="{% url 'graph' %}" class="ds">Choose</a><br><br>
+
+2. Artificial Intelligence<br><a href="">Choose</a><br><br>
+
+<br><br>
+<p id="show"></p>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+
+    $(document).ready(function() {
+        $(".ds").click(function() {
+            function storeUserData1InSession(jsonObj) {
+                window.sessionStorage.setItem('userObject',jsonObj);
+            }
+
+            var ds = {"nodes":[{"node_id":0,"name":"data structure","synonym":"ds"},{"node_id":1,"name":"linear data structure","synonym":""},{"node_id":2,"name":"non linear data structure","synonym":""},{"node_id":3,"name":"array","synonym":""},{"node_id":4,"name":"stack","synonym":""},{"node_id":5,"name":"queue","synonym":""},{"node_id":6,"name":"linked list","synonym":"ll"},{"node_id":7,"name":"tree","synonym":""},{"node_id":8,"name":"graph","synonym":""},{"node_id":9,"name":"sorting","synonym":""},{"node_id":10,"name":"searching","synonym":""},{"node_id":11,"name":"sequential","synonym":""},{"node_id":12,"name":"insertion","synonym":""},{"node_id":13,"name":"deletion","synonym":""},{"node_id":14,"name":"traversal","synonym":""},{"node_id":15,"name":"push","synonym":""},{"node_id":16,"name":"pop","synonym":""},{"node_id":17,"name":"circular queue","synonym":""},{"node_id":18,"name":"priority queue","synonym":""},{"node_id":19,"name":"binary tree","synonym":""},{"node_id":20,"name":"expression tree","synonym":""},{"node_id":21,"name":"huffman tree ","synonym":""},{"node_id":22,"name":"preorder","synonym":""},{"node_id":23,"name":"postorder","synonym":""},{"node_id":24,"name":"inorder","synonym":""},{"node_id":25,"name":"adjacency list","synonym":""},{"node_id":26,"name":"adjacency matrix","synonym":""},{"node_id":27,"name":"radix sort","synonym":""},{"node_id":28,"name":"merge sort","synonym":""},{"node_id":29,"name":"quick sort","synonym":""},{"node_id":30,"name":"binary search","synonym":""},{"node_id":31,"name":"linear search","synonym":""}],
+                      "edges":[{"edge_id":0,"source":0,"target":1,"relation":"hasSubclass"},{"edge_id":1,"source":0,"target":2,"relation":"hasSubclass"},{"edge_id":2,"source":1,"target":3,"relation":"hasSubclass"},{"edge_id":3,"source":1,"target":4,"relation":"hasSubclass"},{"edge_id":4,"source":1,"target":5,"relation":"hasSubclass"},{"edge_id":5,"source":1,"target":6,"relation":"hasSubclass"},{"edge_id":6,"source":2,"target":7,"relation":"hasSubclass"},{"edge_id":7,"source":2,"target":8,"relation":"hasSubclass"},{"edge_id":8,"source":0,"target":9,"relation":"hasApplication"},{"edge_id":9,"source":0,"target":10,"relation":"hasApplication"},{"edge_id":10,"source":0,"target":11,"relation":"hasRepresentation"},{"edge_id":11,"source":0,"target":12,"relation":"hasOperation"},{"edge_id":12,"source":0,"target":13,"relation":"hasOperation"},{"edge_id":13,"source":0,"target":14,"relation":"hasOperation"},{"edge_id":14,"source":4,"target":15,"relation":"hasOperation"},{"edge_id":15,"source":4,"target":16,"relation":"hasOperation"},{"edge_id":16,"source":5,"target":17,"relation":"hasSubclass"},{"edge_id":17,"source":5,"target":18,"relation":"hasSubclass"},{"edge_id":18,"source":7,"target":19,"relation":"hasSubclass"},{"edge_id":19,"source":19,"target":20,"relation":"hasSubclass"},{"edge_id":20,"source":19,"target":21,"relation":"hasSubclass"},{"edge_id":21,"source":7,"target":22,"relation":"hasSubclass"},{"edge_id":22,"source":7,"target":23,"relation":"hasSubclass"},{"edge_id":23,"source":7,"target":24,"relation":"hasSubclass"},{"edge_id":24,"source":8,"target":25,"relation":"hasRepresentation"},{"edge_id":25,"source":8,"target":26,"relation":"hasSubclass"},{"edge_id":26,"source":9,"target":27,"relation":"hasSubclass"},{"edge_id":27,"source":9,"target":28,"relation":"hasSubclass"},{"edge_id":28,"source":9,"target":29,"relation":"hasSubclass"},{"edge_id":29,"source":10,"target":30,"relation":"hasSubclass"},{"edge_id":30,"source":10,"target":31,"relation":"hasSubclass"},{"edge_id":31,"target":12,"source":15,"relation":"isA"},{"edge_id":32,"target":11,"source":26,"relation":"isA"}]};
+            //document.getElementById("show").innerHTML = JSON.stringify(ds);
+
+            jsonObj = JSON.stringify(ds);
+            //document.getElementById("demo").innerHTML = jsonObj;
+            storeUserData1InSession(jsonObj);
+        });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,304 @@
+{% extends "ontology/header.html" %}
+
+{% block content %}
+
+<script>
+
+    var relation = { "hasSubclass" : [ "various", "different", "types", "kinds", "numerous", "many", "several", "subclasses"],
+                    "hasApplication" : [ "apply", "application", "use", "using", "applications"],
+                    "hasOperation" : [ "operation", "methods of", "operations"],
+                    "hasRepresentation" : [ "represent", "represents", "represented", "representation", "representations"]
+                    };
+
+    var rel = "";
+
+    var data = { getUserDataFromSession: function() {
+                    var userData = window.sessionStorage.getItem('userObject');
+                    return JSON.parse(userData);
+                }
+            }
+
+    var jsonObj=data.getUserDataFromSession();
+    for (var j=0 ; j<jsonObj.nodes.length ; j++) {
+        jsonObj.nodes[j].lo_cognitives = [];
+        jsonObj.nodes[j].que_cognitives = [];
+    }
+    //document.getElementById("demo").innerHTML = JSON.stringify(userDataObject);
+    //document.getElementById("dem").innerHTML = JSON.stringify(relation);
+
+    function getRelations(word) {
+        for(var j=0 ; j<relation.hasSubclass.length ; j++) {
+            if(word == relation.hasSubclass[j]) {
+                rel = "hasSubclass";
+            }
+        }
+        for(var j=0 ; j<relation.hasApplication.length ; j++) {
+            if(word == relation.hasApplication[j]) {
+                rel = "hasApplication";
+            }
+        }
+        for(var j=0 ; j<relation.hasOperation.length ; j++) {
+            if(word == relation.hasOperation[j]) {
+                rel = "hasOperation";
+            }
+        }
+        for(var j=0 ; j<relation.hasRepresentation.length ; j++) {
+            if(word == relation.hasRepresentation[j]) {
+                rel = "hasRepresentation";
+            }
+        }
+        return rel;
+    }
+
+
+    function getConcepts(data, rel) {
+
+        var nodes = jsonObj.nodes;
+        var edges = jsonObj.edges;
+
+        for(var i = 0; i < nodes.length ; i++) {
+            if(nodes[i].name == data || nodes[i].synonym == data) {
+                var arr = [];
+                arr.push(nodes[i].name);
+                id = nodes[i].node_id;
+                if(rel != "" || rel != undefined) {
+                    for(var j=0 ; j<edges.length ; j++) {
+                        if(edges[j].relation == rel && edges[j].source == id) {
+                            for( var k=0; k<nodes.length ; k++) {
+                                if(edges[j].target == nodes[k].node_id) {
+                                    arr.push(nodes[k].name);
+                                }
+                            }
+
+                        }
+                    }
+                }
+                return arr;
+            }
+        }
+    }
+
+    function getLOMapping(word, no, cognitive) {
+        for (var j=0 ; j<jsonObj.nodes.length ; j++) {
+            if(jsonObj.nodes[j].name == word) {
+                var cog = {};
+                cog.id = no;
+                cog.level = cognitive;
+                jsonObj.nodes[j].lo_cognitives.push(cog);
+            }
+        }
+    }
+
+    function getQueMapping(word, no, cognitive) {
+        for (var j=0 ; j<jsonObj.nodes.length ; j++) {
+            if(jsonObj.nodes[j].name == word) {
+                var cog = {};
+                cog.id = no;
+                cog.level = cognitive;
+                jsonObj.nodes[j].que_cognitives.push(cog);
+            }
+        }
+    }
+
+</script>
+
+<table border="1" style="display: none">
+    <tr>
+        <th>Sr. No.</th>
+        <th>Concepts</th>
+        <th>LOs</th>
+        <th>Questions</th>
+
+    </tr>
+        <script>
+            for (var j=0 ; j<jsonObj.nodes.length ; j++) {
+                document.write("<tr><td>"+(jsonObj.nodes[j].node_id+1)+"</td><td>"+jsonObj.nodes[j].name+"<td>");
+                for(var k=0 ; k<jsonObj.nodes[j].lo_cognitives.length ; k++) {
+                    document.write(jsonObj.nodes[j].lo_cognitives[k].id+"-"+jsonObj.nodes[j].lo_cognitives[k].level+"<br>");
+                }
+                document.write("</td><td>");
+                for(var k=0 ; k<jsonObj.nodes[j].que_cognitives.length ; k++) {
+                    document.write(jsonObj.nodes[j].que_cognitives[k].id+"-"+jsonObj.nodes[j].que_cognitives[k].level+"<br>");
+                }
+                document.write("</td></tr>");
+            }
+        </script>
+</table>
+
+<p id="hey"></p><br>
+
+<script>
+    var lo_ques = {
+                "los": [],
+                "questions": []
+            };
+</script>
+
+{% for elem in final.los %}
+    <script>
+        var lo = {};
+        lo.l_id = "{{ elem.id }}";
+        lo.cogn = "{{ elem.cognitive }}";
+        var lconc_extr = [];
+        var q_map = [];
+    </script>
+    {% for i in elem.concepts %}
+        <script>
+            var rel = getRelations("{{ i }}");
+            var x = getConcepts("{{ i }}", rel);
+            if(x != undefined) {
+                for (var n=0 ; n<x.length ; n++) {
+                     getLOMapping(x[n], "{{ elem.id }}", "{{ elem.cognitive }}");
+                     lconc_extr.push(x[n]);
+                }
+            }
+        </script>
+    {% endfor %}
+    <script>
+        lo.conc = lconc_extr;
+        lo.q_map = q_map;
+        lo_ques.los.push(lo);
+    </script>
+{% endfor %}
+
+{% for elem in final.questions %}
+    <script>
+        var que = {};
+        que.q_id = "{{ elem.id }}";
+        que.cogn = "{{ elem.cognitive }}";
+        var qconc_extr = [];
+        var lo_map = [];
+    </script>
+    {% for i in elem.concepts %}
+        <script>
+            var rel = getRelations("{{ i }}");
+            var x = getConcepts("{{ i }}", rel);
+            if(x != undefined) {
+                for (var n=0 ; n<x.length ; n++) {
+                     getQueMapping(x[n], "{{ elem.id }}", "{{ elem.cognitive }}");
+                     qconc_extr.push(x[n]);
+                }
+            }
+        </script>
+    {% endfor %}
+    <script>
+        que.conc = qconc_extr;
+        que.lo_map = lo_map;
+        lo_ques.questions.push(que);
+    </script>
+{% endfor %}
+
+<script>
+    for(var i=0 ; i<lo_ques.los.length ; i++) {
+        for(var j=0 ; j<lo_ques.questions.length ; j++) {
+            var q_det = {};
+            var common_conc = [];
+            q_det.q_no = lo_ques.questions[j].q_id;
+            for(var k=0 ; k<lo_ques.los[i].conc.length ; k++) {
+                for(var m=0 ; m<lo_ques.questions[j].conc.length ; m++) {
+                    if(lo_ques.los[i].conc[k] == lo_ques.questions[j].conc[m] ) {
+
+                        common_conc.push(lo_ques.questions[j].conc[m]);
+                        q_det.common_conc = common_conc;
+                        lo_ques.los[i].q_map.push(q_det);
+                        lo_ques.questions[j].lo_map.push(lo_ques.los[i].l_id);
+
+                    }
+                }
+            }
+            lo_ques.questions[j].lo_map = Array.from(new Set(lo_ques.questions[j].lo_map));
+        }
+        lo_ques.los[i].q_map = Array.from(new Set(lo_ques.los[i].q_map));
+    }
+</script>
+
+<h3>LO details:</h3>
+<table border="1">
+    <tr>
+        <th>LO No.</th>
+        <th>Cognitive<br> Level</th>
+        <th>Concepts</th>
+
+
+    </tr>
+        <script>
+            for(var i=0; i<lo_ques.los.length ; i++) {
+                document.write("<tr><td>LO"+lo_ques.los[i].l_id+"</td><td>"+lo_ques.los[i].cogn+"</td><td>"+lo_ques.los[i].conc+"</td></tr>");
+
+            }
+        </script>
+
+</table>
+
+<br>
+
+<br>
+<h3>Question details:</h3>
+<table border="1">
+    <tr>
+        <th>Question No.</th>
+        <th>Cognitive<br> Level</th>
+        <th>Concepts</th>
+
+
+    </tr>
+        <script>
+            for(var i=0; i<lo_ques.questions.length ; i++) {
+                document.write("<tr><td>Q"+lo_ques.questions[i].q_id+"</td><td>"+lo_ques.questions[i].cogn+"</td><td>"+lo_ques.questions[i].conc+"</td></tr>");
+            }
+        </script>
+
+</table>
+<br>
+<h3>LOs and Questions mapping</h3>
+<table border="1">
+    <tr>
+        <th>LO No.</th>
+        <th>Cognitive<br> Level</th>
+        <th>Concepts</th>
+        <th>Questions<br> covered by LO</th>
+        <th>Cognitive Levels<br> of the Questions</th>
+        <th>Concepts in<br> the Questions</th>
+        <th>Common Concepts</th>
+
+    </tr>
+        <script>
+            for(var i=0; i<lo_ques.los.length ; i++) {
+                var row_len = 1;
+                if(lo_ques.los[i].q_map.length > 0) {
+                    row_len = lo_ques.los[i].q_map.length;
+                }
+
+                document.write("<tr><td rowspan="+row_len+">LO"+lo_ques.los[i].l_id+"</td>");
+                document.write("<td rowspan="+row_len+">"+lo_ques.los[i].cogn+"</td>");
+                document.write("<td rowspan="+row_len+">"+lo_ques.los[i].conc+"</td>");
+                if(lo_ques.los[i].q_map.length == 0) {
+                        document.write("<td></td><td></td><td></td></tr>");
+                }
+                else {
+                    for(var j=0; j<lo_ques.los[i].q_map.length ; j++) {
+                        document.write("<td>Q"+lo_ques.los[i].q_map[j].q_no+"</td>");
+                        for(var k=0; k<lo_ques.questions.length ; k++) {
+                            if(lo_ques.los[i].q_map[j].q_no == lo_ques.questions[k].q_id) {
+                                document.write("<td>"+lo_ques.questions[k].cogn+"</td><td>"+lo_ques.questions[k].conc+"</td>");
+                            }
+                        }
+                        document.write("<td>"+lo_ques.los[i].q_map[j].common_conc+"</td></tr>");
+                    }
+                }
+            }
+        </script>
+
+</table>
+
+<script>//document.getElementById("hey").innerHTML = JSON.stringify(lo_ques);</script>
+
+
+<script>
+    jsonObj1 = JSON.stringify(jsonObj);
+    window.sessionStorage.setItem('userOnto',jsonObj1);
+</script>
+
+<a class="mapped_onto" href="{% url 'details' %}">Mapped Ontology</a>
+
+{% endblock %}

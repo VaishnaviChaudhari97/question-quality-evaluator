@@ -3,12 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>IQuE</title>
+    <style>
+        div.add-rell, div.add-more {
+                   width: 10%;
+                   border-style: outset;
+                   cursor: pointer;
+        }
+
+        div.graph, div.display {
+            border-style: groove;
+        }
+
+        .d3-tip {
+            line-height: 1;
+            color: black;
+            border-style: groove;
+        }
+
+        .del, .del2 {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-<h2> Instrument(Question paper) Evaluator</h2>
-    <div>
+<h2> Question Quality Evaluator</h2>
+<div>
     {% block content %}
+
     {% endblock %}
-    </div>
+</div>
 </body>
 </html>

@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fd30329d-541d-42af-b642-92c710e4c15d" name="Default Changelist" comment="" />
+    <list default="true" id="fd30329d-541d-42af-b642-92c710e4c15d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/ique/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/ique/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ique/ique/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/ique/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ique/ique/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/media/files/ai/qnew.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/media/files/ai/qnew_ITJaQph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/media/files/los/los.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/media/files/los/los_MSVdbZY.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/media/files/new.owl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/media/files/owl/final.owl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/media/files/owl/final_Jx6f9zG.owl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/media/files/some.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/ontology/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/ontology/graphhandler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/ontology/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/ique/ontology/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/ontology/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/ique/ontology/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/ontology/templates/ontology/accept.html" beforeDir="false" afterPath="$PROJECT_DIR$/ique/ontology/templates/ontology/accept.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/ontology/templates/ontology/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/ique/ontology/templates/ontology/details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/ontology/templates/ontology/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/ique/ontology/templates/ontology/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/ontology/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ique/ontology/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ique/ontology/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ique/ontology/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Iquetool1/.idea/Iquetool_demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Iquetool1/.idea/Iquetool_demo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Iquetool1/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Iquetool1/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Iquetool1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Iquetool1/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,118 +37,92 @@
     <session id="761356062">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="10" />
+          <entry key="project.open.time.12" value="1" />
+          <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.28" value="1" />
-          <entry key="project.open.time.30" value="1" />
+          <entry key="project.open.time.26" value="1" />
+          <entry key="project.open.time.27" value="1" />
+          <entry key="project.open.time.28" value="2" />
+          <entry key="project.open.time.3" value="2" />
+          <entry key="project.open.time.30" value="2" />
+          <entry key="project.open.time.32" value="2" />
           <entry key="project.open.time.36" value="1" />
           <entry key="project.open.time.41" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="5" />
-          <entry key="owl" value="2" />
-          <entry key="py" value="21" />
-          <entry key="txt" value="3" />
+          <entry key="html" value="64" />
+          <entry key="owl" value="5" />
+          <entry key="py" value="81" />
+          <entry key="txt" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="5" />
-          <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="21" />
+          <entry key="HTML" value="64" />
+          <entry key="PLAIN_TEXT" value="11" />
+          <entry key="Python" value="81" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="863" />
-          <entry key="py" value="1433" />
+          <entry key="Python Console" value="96" />
+          <entry key="html" value="23347" />
+          <entry key="py" value="5537" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="863" />
-          <entry key="Python" value="1433" />
+          <entry key="HTML" value="23347" />
+          <entry key="Python" value="5633" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="2040351297">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="html" value="2" />
+          <entry key="py" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="HTML" value="2" />
+          <entry key="Python" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="txt" value="133" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="133" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../Iquetool1/graphvisualization.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ique/ontology/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+            <state relative-caret-position="17">
+              <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Iquetool1/ontologygraph.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="44" selection-start-line="44" selection-end-line="44" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-                <marker date="1538924769453" expanded="true" signature="45:47" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Iquetool1/lomapping.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
-              <caret line="63" selection-start-line="63" selection-end-line="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ique/ontology/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ique/ontology/templates/ontology/details.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ique/ontology/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ique/ontology/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#59#0" expanded="true" />
-                <marker date="1538416266323" expanded="true" signature="461:466" ph="..." />
+                <element signature="e#0#32#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -132,20 +131,43 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ique/ique/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2091">
-              <caret line="123" column="44" selection-start-line="123" selection-start-column="44" selection-end-line="123" selection-end-column="44" />
+            <state relative-caret-position="51">
+              <caret line="3" column="70" selection-start-line="3" selection-start-column="70" selection-end-line="3" selection-end-column="70" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ique/ique/urls.py">
+        <entry file="file://$PROJECT_DIR$/ique/ontology/templates/ontology/evaluation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="26" column="80" selection-start-line="26" selection-start-column="80" selection-end-line="26" selection-end-column="80" />
-              <folding>
-                <element signature="e#628#660#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-4707" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ique/ontology/templates/ontology/files.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ique/ontology/extraction.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ique/ontology/templates/ontology/header.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="35" column="7" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ique/ontology/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
             </state>
           </provider>
         </entry>
@@ -155,36 +177,51 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>background-color: light blue;</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ique/ique/settings.py" />
-        <option value="$PROJECT_DIR$/ique/ique/urls.py" />
-        <option value="$PROJECT_DIR$/ique/ontology/graphhandler.py" />
-        <option value="$PROJECT_DIR$/ique/ontology/views.py" />
-        <option value="$PROJECT_DIR$/ique/ontology/urls.py" />
-        <option value="$PROJECT_DIR$/ique/ontology/models.py" />
-        <option value="$PROJECT_DIR$/ique/ontology/forms.py" />
-        <option value="$PROJECT_DIR$/ique/ontology/templates/ontology/header.html" />
-        <option value="$PROJECT_DIR$/ique/ontology/templates/ontology/details.html" />
-        <option value="$PROJECT_DIR$/ique/ontology/templates/ontology/accept.html" />
         <option value="$PROJECT_DIR$/../Iquetool1/lomapping.py" />
         <option value="$PROJECT_DIR$/../Iquetool1/ontologygraph.py" />
         <option value="$PROJECT_DIR$/../Iquetool1/graphvisualization.py" />
+        <option value="$PROJECT_DIR$/ique/ontology/migrations/0001_initial.py" />
+        <option value="$PROJECT_DIR$/ique/ontology/graphhandler.py" />
+        <option value="$PROJECT_DIR$/ique/ontology/forms.py" />
+        <option value="$PROJECT_DIR$/ique/ontology/models.py" />
+        <option value="$PROJECT_DIR$/ique/ontology/extraction.py" />
+        <option value="$PROJECT_DIR$/ique/ontology/urls.py" />
+        <option value="$PROJECT_DIR$/ique/ontology/views.py" />
+        <option value="$PROJECT_DIR$/ique/ique/urls.py" />
+        <option value="$PROJECT_DIR$/ique/ontology/templates/ontology/home.html" />
+        <option value="$PROJECT_DIR$/ique/ontology/templates/ontology/accept.html" />
+        <option value="$PROJECT_DIR$/ique/ontology/templates/ontology/files.html" />
+        <option value="$PROJECT_DIR$/ique/ontology/templates/ontology/ontologies.html" />
+        <option value="$PROJECT_DIR$/ique/ontology/templates/ontology/graph.html" />
+        <option value="$PROJECT_DIR$/ique/ontology/templates/ontology/header.html" />
+        <option value="$PROJECT_DIR$/ique/ontology/templates/ontology/relations.html" />
+        <option value="$PROJECT_DIR$/ique/ontology/templates/ontology/details.html" />
+        <option value="$PROJECT_DIR$/ique/ontology/templates/ontology/evaluation.html" />
+        <option value="$PROJECT_DIR$/ique/ique/settings.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="10" />
-    <option name="y" value="20" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="width" value="1366" />
+    <option name="height" value="694" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -206,26 +243,28 @@
               <item name="BEproject" type="b2602c69:ProjectViewProjectNode" />
               <item name="BEproject" type="462c0819:PsiDirectoryNode" />
               <item name="ique" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="ique" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BEproject" type="b2602c69:ProjectViewProjectNode" />
               <item name="BEproject" type="462c0819:PsiDirectoryNode" />
               <item name="ique" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="files" type="462c0819:PsiDirectoryNode" />
+              <item name="ontology" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BEproject" type="b2602c69:ProjectViewProjectNode" />
               <item name="BEproject" type="462c0819:PsiDirectoryNode" />
               <item name="ique" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="files" type="462c0819:PsiDirectoryNode" />
-              <item name="owl" type="462c0819:PsiDirectoryNode" />
+              <item name="ontology" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BEproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Iquetool1" type="462c0819:PsiDirectoryNode" />
+              <item name="BEproject" type="462c0819:PsiDirectoryNode" />
+              <item name="ique" type="462c0819:PsiDirectoryNode" />
+              <item name="ontology" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="ontology" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -236,8 +275,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Iquetool1" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -251,7 +290,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.graphvisualization">
+  <component name="RunManager" selected="Python.graphhandler">
     <configuration name="graphhandler" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BEproject" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -344,10 +383,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.graphhandler" />
         <item itemvalue="Python.graphvisualization" />
         <item itemvalue="Python.ontologygraph" />
         <item itemvalue="Python.lomapping" />
-        <item itemvalue="Python.graphhandler" />
       </list>
     </recent_temporary>
   </component>
@@ -374,42 +413,41 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7902439" visible="true" weight="0.19345239" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7902439" visible="true" weight="0.1904762" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
       <window_info anchor="bottom" id="Debug" order="2" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.3289689" />
-      <window_info anchor="bottom" id="Version Control" order="6" show_stripe_button="false" />
-      <window_info anchor="bottom" auto_hide="true" id="Run" order="7" sideWeight="0.20975609" weight="0.22585924" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="bottom" id="Version Control" order="6" />
+      <window_info anchor="bottom" auto_hide="true" id="Run" order="7" sideWeight="0.20975609" weight="0.59738135" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3289689" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50074404" side_tool="true" weight="0.3289689" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49925596" weight="0.3289689" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21875" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7902439" visible="true" weight="0.19345239" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.42389524" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="5" weight="0.3289689" />
+      <window_info anchor="bottom" id="Version Control" order="6" show_stripe_button="false" />
+      <window_info anchor="bottom" auto_hide="true" id="Run" order="7" sideWeight="0.20975609" weight="0.59738135" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3289689" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50074404" side_tool="true" weight="0.3289689" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49925596" weight="0.3289689" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -418,135 +456,160 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Updated for output in tabular and graphical format" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated for output in tabular and graphical format" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ique/ontology/urls.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/ique/media/files/some_pkSnWD1.txt" />
-    <entry file="file://$PROJECT_DIR$/ique/media/files/some.txt">
+    <entry file="file://$PROJECT_DIR$/ique/media/files/some.txt" />
+    <entry file="file://$PROJECT_DIR$/../Iquetool1/graphvisualization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Iquetool1/ontologygraph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../Iquetool1/lomapping.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/Django-2.1rc1-py3.7.egg/django/db/models/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8262">
+          <caret line="518" column="78" selection-start-line="518" selection-start-column="78" selection-end-line="518" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ique/media/files/los/los_MSVdbZY.txt" />
+    <entry file="file://$PROJECT_DIR$/ique/media/files/los/los.txt" />
+    <entry file="file://$PROJECT_DIR$/ique/ontology/migrations/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ique/media/files/new.owl">
+    <entry file="file://$PROJECT_DIR$/ique/ontology/migrations/0001_initial.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1768">
-          <caret line="104" selection-start-line="104" selection-end-line="104" />
+        <state relative-caret-position="357">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ique/ontology/graphhandler.py">
+    <entry file="file://$PROJECT_DIR$/ique/media/files/new.owl" />
+    <entry file="file://$PROJECT_DIR$/ique/media/files/owl/final.owl" />
+    <entry file="file://$PROJECT_DIR$/ique/media/concepts.txt" />
+    <entry file="file://$PROJECT_DIR$/ique/manage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="170">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ique/ontology/forms.py" />
+    <entry file="file://$PROJECT_DIR$/ique/ontology/graphhandler.py" />
+    <entry file="file://$PROJECT_DIR$/ique/ique/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ique/ique/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ique/ontology/admin.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/ique/ontology/apps.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ique/ontology/templates/ontology/header.html">
+    <entry file="file://$PROJECT_DIR$/ique/ontology/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+        <state relative-caret-position="34">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ique/ontology/urls.py">
+    <entry file="file://$PROJECT_DIR$/ique/ontology/tests.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ique/ontology/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ique/ique/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="53" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
+        <state relative-caret-position="187">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ique/ontology/templates/ontology/accept.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
-          <caret line="4" column="58" selection-start-line="4" selection-start-column="58" selection-end-line="4" selection-end-column="58" />
+          <caret line="4" column="66" selection-start-line="4" selection-start-column="66" selection-end-line="4" selection-end-column="66" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ique/media/files/owl/final.owl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="220" selection-start-line="220" selection-end-line="220" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Iquetool1/graphvisualization.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Iquetool1/ontologygraph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-            <marker date="1538924769453" expanded="true" signature="45:47" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Iquetool1/lomapping.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ique/ontology/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ique/ontology/templates/ontology/home.html" />
+    <entry file="file://$PROJECT_DIR$/ique/ontology/templates/ontology/ontologies.html" />
     <entry file="file://$PROJECT_DIR$/ique/ontology/templates/ontology/details.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+        <state relative-caret-position="1326">
+          <caret line="78" column="65" selection-start-line="78" selection-start-column="65" selection-end-line="78" selection-end-column="65" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ique/ontology/forms.py">
+    <entry file="file://$PROJECT_DIR$/ique/ontology/templates/ontology/graph.html" />
+    <entry file="file://$PROJECT_DIR$/ique/ontology/templates/ontology/relations.html" />
+    <entry file="file://$PROJECT_DIR$/ique/ontology/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
+        <state relative-caret-position="17">
+          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ique/ontology/templates/ontology/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="35" column="7" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ique/ontology/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-            <marker date="1538416266323" expanded="true" signature="461:466" ph="..." />
-          </folding>
+        <state relative-caret-position="221">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ique/ique/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2091">
-          <caret line="123" column="44" selection-start-line="123" selection-start-column="44" selection-end-line="123" selection-end-column="44" />
+        <state relative-caret-position="51">
+          <caret line="3" column="70" selection-start-line="3" selection-start-column="70" selection-end-line="3" selection-end-column="70" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ique/ique/urls.py">
+    <entry file="file://$PROJECT_DIR$/ique/ontology/templates/ontology/evaluation.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="26" column="80" selection-start-line="26" selection-start-column="80" selection-end-line="26" selection-end-column="80" />
-          <folding>
-            <element signature="e#628#660#0" expanded="true" />
-          </folding>
-        </state>
+        <state relative-caret-position="-4707" />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ique/ontology/templates/ontology/files.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ique/ontology/extraction.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
