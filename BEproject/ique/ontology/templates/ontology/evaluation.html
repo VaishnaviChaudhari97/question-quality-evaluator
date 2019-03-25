@@ -3,7 +3,6 @@
 {% block content %}
 
 <script>
-
     var relation = { "hasSubclass" : [ "various", "different", "types", "kinds", "numerous", "many", "several", "subclasses"],
                     "hasApplication" : [ "apply", "application", "use", "using", "applications"],
                     "hasOperation" : [ "operation", "methods of", "operations"],
@@ -24,7 +23,6 @@
         jsonObj.nodes[j].que_cognitives = [];
     }
     //document.getElementById("demo").innerHTML = JSON.stringify(userDataObject);
-    //document.getElementById("dem").innerHTML = JSON.stringify(relation);
 
     function getRelations(word) {
         for(var j=0 ; j<relation.hasSubclass.length ; j++) {
@@ -99,7 +97,6 @@
             }
         }
     }
-
 </script>
 
 <table border="1" style="display: none">
@@ -108,7 +105,6 @@
         <th>Concepts</th>
         <th>LOs</th>
         <th>Questions</th>
-
     </tr>
         <script>
             for (var j=0 ; j<jsonObj.nodes.length ; j++) {
@@ -189,11 +185,38 @@
 {% endfor %}
 
 <script>
+
+    function getCognitive_level(cogn) {
+        level = 0;
+        switch(cogn) {
+            case "Recall": level = 1; break;
+            case "Understand": level = 2; break;
+            case "Apply": level = 3; break;
+            case "Analyze": level = 4; break;
+            case "Evaluate": level = 5; break;
+            case "Create": level = 6; break;
+        }
+        return level;
+    }
+
     for(var i=0 ; i<lo_ques.los.length ; i++) {
         for(var j=0 ; j<lo_ques.questions.length ; j++) {
             var q_det = {};
             var common_conc = [];
             q_det.q_no = lo_ques.questions[j].q_id;
+
+        //Cognitive Level Alignment Score
+            if(lo_ques.los[i].cogn == lo_ques.questions[j].cogn) {
+                q_det.cogn_score = 100;
+            }
+            else if(getCognitive_level(lo_ques.los[i].cogn) == getCognitive_level(lo_ques.questions[j].cogn)+1 || getCognitive_level(lo_ques.los[i].cogn) == getCognitive_level(lo_ques.questions[j].cogn)-1) {
+                q_det.cogn_score =50;
+            }
+            else {
+                q_det.cogn_score = 0;
+            }
+
+        //Extracting common concepts
             for(var k=0 ; k<lo_ques.los[i].conc.length ; k++) {
                 for(var m=0 ; m<lo_ques.questions[j].conc.length ; m++) {
                     if(lo_ques.los[i].conc[k] == lo_ques.questions[j].conc[m] ) {
@@ -216,64 +239,66 @@
 <table border="1">
     <tr>
         <th>LO No.</th>
-        <th>Cognitive<br> Level</th>
+        <th>Cognitive Level</th>
         <th>Concepts</th>
-
-
     </tr>
         <script>
             for(var i=0; i<lo_ques.los.length ; i++) {
                 document.write("<tr><td>LO"+lo_ques.los[i].l_id+"</td><td>"+lo_ques.los[i].cogn+"</td><td>"+lo_ques.los[i].conc+"</td></tr>");
-
             }
         </script>
-
 </table>
 
 <br>
 
-<br>
 <h3>Question details:</h3>
 <table border="1">
     <tr>
         <th>Question No.</th>
         <th>Cognitive<br> Level</th>
         <th>Concepts</th>
-
-
     </tr>
         <script>
             for(var i=0; i<lo_ques.questions.length ; i++) {
                 document.write("<tr><td>Q"+lo_ques.questions[i].q_id+"</td><td>"+lo_ques.questions[i].cogn+"</td><td>"+lo_ques.questions[i].conc+"</td></tr>");
             }
         </script>
-
 </table>
+
 <br>
-<h3>LOs and Questions mapping</h3>
+
+<h3>LOs and Questions mapping:</h3>
 <table border="1">
     <tr>
-        <th>LO No.</th>
-        <th>Cognitive<br> Level</th>
-        <th>Concepts</th>
-        <th>Questions<br> covered by LO</th>
-        <th>Cognitive Levels<br> of the Questions</th>
-        <th>Concepts in<br> the Questions</th>
-        <th>Common Concepts</th>
-
+        <th>LOs</th>
+        <th>Cognitive Level of the LO</th>
+        <th>Concepts involved in the LO</th>
+        <th>Questions covered by LO</th>
+        <th>Cognitive Level of the Question</th>
+        <th>Concepts involved in the Question</th>
+        <th>Content Alignment Score with respect to LO</th>
+        <th>Cognitive Level Alignment Score with respect to LO</th>
     </tr>
         <script>
+            var final_cogn_score = 0;
             for(var i=0; i<lo_ques.los.length ; i++) {
                 var row_len = 1;
                 if(lo_ques.los[i].q_map.length > 0) {
                     row_len = lo_ques.los[i].q_map.length;
+                    max_cogn_score = lo_ques.los[i].q_map[0].cogn_score;
+                    for(var j=1 ; j<lo_ques.los[i].q_map.length ; j++) {
+                        if(lo_ques.los[i].q_map[j].cogn_score > max_cogn_score) {
+                            max_cogn_score = lo_ques.los[i].q_map[j].cogn_score;
+                        }
+                    }
                 }
+                final_cogn_score = final_cogn_score + max_cogn_score;
 
                 document.write("<tr><td rowspan="+row_len+">LO"+lo_ques.los[i].l_id+"</td>");
                 document.write("<td rowspan="+row_len+">"+lo_ques.los[i].cogn+"</td>");
                 document.write("<td rowspan="+row_len+">"+lo_ques.los[i].conc+"</td>");
                 if(lo_ques.los[i].q_map.length == 0) {
-                        document.write("<td></td><td></td><td></td></tr>");
+                        document.write("<td></td><td></td><td></td><td></td><td></td></tr>");
                 }
                 else {
                     for(var j=0; j<lo_ques.los[i].q_map.length ; j++) {
@@ -283,16 +308,23 @@
                                 document.write("<td>"+lo_ques.questions[k].cogn+"</td><td>"+lo_ques.questions[k].conc+"</td>");
                             }
                         }
-                        document.write("<td>"+lo_ques.los[i].q_map[j].common_conc+"</td></tr>");
+                        document.write("<td></td><td>"+lo_ques.los[i].q_map[j].cogn_score+"</td></tr>");
                     }
                 }
             }
+            final_cogn_score = final_cogn_score/(lo_ques.los.length);
         </script>
-
 </table>
+<br>
 
-<script>//document.getElementById("hey").innerHTML = JSON.stringify(lo_ques);</script>
+<p id="concept_score"><b>Concept Alignment Score of the Question paper:   </b></p><br>
+<p id="cognitive_score"><b>Cognitive Level Alignment Score of the Question paper:   </b></p>
+<br>
 
+<script>
+    //document.getElementById("hey").innerHTML = JSON.stringify(lo_ques);
+    document.getElementById("cognitive_score").innerHTML += final_cogn_score+"%";
+</script>
 
 <script>
     jsonObj1 = JSON.stringify(jsonObj);
