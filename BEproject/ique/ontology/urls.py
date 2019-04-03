@@ -1,7 +1,13 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from . import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    url('^', include('django.contrib.auth.urls')),
+
+    url(r'^index/', views.index, name='index'),
+
+    url(r'^register/', views.UserFormView.as_view(), name='register'),
 
     url(r'^home/', views.home, name='home'),
 
