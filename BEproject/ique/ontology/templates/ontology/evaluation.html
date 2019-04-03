@@ -22,7 +22,6 @@
         jsonObj.nodes[j].lo_cognitives = [];
         jsonObj.nodes[j].que_cognitives = [];
     }
-    //document.getElementById("demo").innerHTML = JSON.stringify(userDataObject);
 
     function getRelations(word) {
         for(var j=0 ; j<relation.hasSubclass.length ; j++) {
@@ -97,33 +96,7 @@
             }
         }
     }
-</script>
 
-<table border="1" style="display: none">
-    <tr>
-        <th>Sr. No.</th>
-        <th>Concepts</th>
-        <th>LOs</th>
-        <th>Questions</th>
-    </tr>
-        <script>
-            for (var j=0 ; j<jsonObj.nodes.length ; j++) {
-                document.write("<tr><td>"+(jsonObj.nodes[j].node_id+1)+"</td><td>"+jsonObj.nodes[j].name+"<td>");
-                for(var k=0 ; k<jsonObj.nodes[j].lo_cognitives.length ; k++) {
-                    document.write(jsonObj.nodes[j].lo_cognitives[k].id+"-"+jsonObj.nodes[j].lo_cognitives[k].level+"<br>");
-                }
-                document.write("</td><td>");
-                for(var k=0 ; k<jsonObj.nodes[j].que_cognitives.length ; k++) {
-                    document.write(jsonObj.nodes[j].que_cognitives[k].id+"-"+jsonObj.nodes[j].que_cognitives[k].level+"<br>");
-                }
-                document.write("</td></tr>");
-            }
-        </script>
-</table>
-
-<p id="hey"></p><br>
-
-<script>
     var lo_ques = {
                 "los": [],
                 "questions": []
@@ -215,6 +188,7 @@
             else {
                 q_det.cogn_score = 0;
             }
+            q_det.conc_score = 0;
 
         //Extracting common concepts
             for(var k=0 ; k<lo_ques.los[i].conc.length ; k++) {
@@ -285,48 +259,166 @@
                 var row_len = 1;
                 if(lo_ques.los[i].q_map.length > 0) {
                     row_len = lo_ques.los[i].q_map.length;
-                    max_cogn_score = lo_ques.los[i].q_map[0].cogn_score;
-                    for(var j=1 ; j<lo_ques.los[i].q_map.length ; j++) {
-                        if(lo_ques.los[i].q_map[j].cogn_score > max_cogn_score) {
-                            max_cogn_score = lo_ques.los[i].q_map[j].cogn_score;
-                        }
-                    }
                 }
-                final_cogn_score = final_cogn_score + max_cogn_score;
 
                 document.write("<tr><td rowspan="+row_len+">LO"+lo_ques.los[i].l_id+"</td>");
                 document.write("<td rowspan="+row_len+">"+lo_ques.los[i].cogn+"</td>");
                 document.write("<td rowspan="+row_len+">"+lo_ques.los[i].conc+"</td>");
-                if(lo_ques.los[i].q_map.length == 0) {
-                        document.write("<td></td><td></td><td></td><td></td><td></td></tr>");
-                }
-                else {
+                max_cogn_score = 0;
+
+                if(lo_ques.los[i].q_map.length > 0) {
+
                     for(var j=0; j<lo_ques.los[i].q_map.length ; j++) {
+
+                        conc_score = 0;
+
+                        cl_cq = lo_ques.los[i].q_map[j].common_conc.length;
+                        cl_ncq = lo_ques.los[i].conc.length - lo_ques.los[i].q_map[j].common_conc.length;
+
                         document.write("<td>Q"+lo_ques.los[i].q_map[j].q_no+"</td>");
+
+                        if(lo_ques.los[i].q_map[j].cogn_score > max_cogn_score) {
+                            max_cogn_score = lo_ques.los[i].q_map[j].cogn_score;
+                        }
                         for(var k=0; k<lo_ques.questions.length ; k++) {
                             if(lo_ques.los[i].q_map[j].q_no == lo_ques.questions[k].q_id) {
+                                cq_ncl = lo_ques.questions[k].conc.length - lo_ques.los[i].q_map[j].common_conc.length;
+
                                 document.write("<td>"+lo_ques.questions[k].cogn+"</td><td>"+lo_ques.questions[k].conc+"</td>");
                             }
                         }
-                        document.write("<td></td><td>"+lo_ques.los[i].q_map[j].cogn_score+"</td></tr>");
+                        conc_score = cl_cq/(cl_cq + cl_ncq + cq_ncl);
+                        if(!Number.isInteger(conc_score)) {
+                            conc_score = conc_score.toFixed(4);
+                        }
+                        lo_ques.los[i].q_map[j].conc_score = conc_score;
+                        document.write("<td>"+conc_score+"</td><td>"+lo_ques.los[i].q_map[j].cogn_score+"</td></tr>");
                     }
+
                 }
+                else {
+
+                    document.write("<td></td><td></td><td></td><td></td><td></td></tr>");
+                }
+                final_cogn_score = final_cogn_score + max_cogn_score;
             }
             final_cogn_score = final_cogn_score/(lo_ques.los.length);
+
         </script>
 </table>
-<br>
 
-<p id="concept_score"><b>Concept Alignment Score of the Question paper:   </b></p><br>
+<p id="concept_score"><b>Concept Alignment Score of the Question paper:   </b></p>
 <p id="cognitive_score"><b>Cognitive Level Alignment Score of the Question paper:   </b></p>
 <br>
 
 <script>
-    //document.getElementById("hey").innerHTML = JSON.stringify(lo_ques);
-    document.getElementById("cognitive_score").innerHTML += final_cogn_score+"%";
-</script>
 
-<script>
+//Concept Alignment Score Calculation
+    function CombinedScore(lo, q, qmax) {
+        var x = [], y = [], a = [], b = [];
+        x = lo_ques.los[lo].q_map[q].common_conc.concat(lo_ques.los[lo].q_map[qmax].common_conc);
+        y = x.filter(function (item, pos) {return x.indexOf(item) == pos});
+
+        for(var i=0; i<lo_ques.questions.length ; i++) {
+            if(lo_ques.los[lo].q_map[q].q_no == lo_ques.questions[i].q_id) {
+                a = lo_ques.questions[i].conc;
+            }
+            if(lo_ques.los[lo].q_map[qmax].q_no == lo_ques.questions[i].q_id) {
+                b = lo_ques.questions[i].conc;
+            }
+        }
+        var c = a.concat(b);
+        var d = c.filter(function (item, pos) {return c.indexOf(item) == pos});
+
+        var cl_ccq = y.length;
+        var cl_nccq = lo_ques.los[lo].conc.length - y.length;
+        var ccq_ncl = d.length - y.length;
+        var cs = cl_ccq/(cl_ccq + cl_nccq + ccq_ncl);
+        return cs.toFixed(4);
+    }
+
+    var final_conc_score = 0;
+    var sum = 0;
+    for(var i=0 ; i<lo_ques.los.length ; i++) {
+
+        var lo_conc_score = 0;
+        var flag = 0;
+        if(lo_ques.los[i].q_map.length == 1) {
+            flag = 1;
+            lo_conc_score = Number(lo_ques.los[i].q_map[0].conc_score);
+        }
+        else if(lo_ques.los[i].q_map.length > 1) {
+            for(var j=0 ; j<lo_ques.los[i].q_map.length ; j++) {
+                if(lo_ques.los[i].q_map[j].conc_score == 1) {
+                    flag = 1;
+                    lo_conc_score = 1;
+                    for(var k=0 ; k<lo_ques.los[i].q_map.length ; k++) {
+                        if(k!=j) {
+                            lo_ques.los[i].q_map[k].conc_score = 0;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        if(flag == 0) {
+            var isProcessed = [];
+            for(var j=0 ; j<lo_ques.los[i].q_map.length ; j++) {
+                isProcessed[j] = 0;
+            }
+            var p_count = 1;
+            var max_conc_score, jmax;
+
+            while(p_count > 0) {
+                p_count = 0;
+                max_conc_score = 0;
+                for(var j=0 ; j<lo_ques.los[i].q_map.length ; j++) {
+                    if(isProcessed[j]==0) {
+                        if(lo_ques.los[i].q_map[j].conc_score > max_conc_score) {
+                            max_conc_score = lo_ques.los[i].q_map[j].conc_score;
+                            jmax = j;
+                        }
+                    }
+                }
+
+                if(max_conc_score == 0) {
+                    break;
+                }
+                else {
+                    isProcessed[jmax] = 1;
+                    for(var j=0 ; j<lo_ques.los[i].q_map.length ; j++) {
+                        if(j!=jmax && isProcessed[j]==0 && lo_ques.los[i].q_map[j].conc_score!=0) {
+                            cs = CombinedScore(i, j, jmax);
+                            if(cs <= lo_ques.los[i].q_map[jmax].conc_score) {
+                                 lo_ques.los[i].q_map[j].conc_score = 0;
+                                 p_count = p_count + 1;
+                            }
+                        }
+                    }
+                }
+            }
+
+            var processed = -1;
+            for(j=0 ; j<lo_ques.los[i].q_map.length ; j++) {
+                if(lo_ques.los[i].q_map[j].conc_score!=0 && j!=processed) {
+                    lo_conc_score = Number(lo_ques.los[i].q_map[j].conc_score);
+                    for(var k=j+1 ; k<lo_ques.los[i].q_map.length ; k++) {
+                        if(lo_ques.los[i].q_map[k].conc_score!=0) {
+                            processed = k;
+                            lo_conc_score = Number(CombinedScore(i,j,k));
+                        }
+                    }
+                }
+            }
+        }
+        sum = sum+(lo_conc_score);
+    }
+    final_conc_score = (sum*100)/(lo_ques.los.length);
+
+    document.getElementById("concept_score").innerHTML += final_conc_score+"%";
+    document.getElementById("cognitive_score").innerHTML += final_cogn_score+"%";
+
     jsonObj1 = JSON.stringify(jsonObj);
     window.sessionStorage.setItem('userOnto',jsonObj1);
 </script>
