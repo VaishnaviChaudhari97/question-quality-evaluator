@@ -81,6 +81,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LOGIN_REDIRECT_URL = '/iquee/home/'
+LOGOUT_REDIRECT_URL = '/iquee/index/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/

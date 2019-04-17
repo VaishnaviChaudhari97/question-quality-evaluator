@@ -1,15 +1,35 @@
 {% extends "ontology/header.html" %}
 
+{% block title %} Results {% endblock %}
+
 {% block content %}
+
+<div class="topnav">
+    <a  href="/iquee/index">Home</a>
+    <a href="/iquee/documentation">Documentation</a>
+    <a href="/iquee/contact">Contact Us</a>
+    <a class="active" href="">Evaluation</a>
+
+    <div class="topnav-right">
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <script>
+                alert("Please Login or Register!");
+                window.location.href="/iquee/index/";
+            </script>
+        {% endif %}
+    </div>
+</div>
+
+<h3 align="center">Results and Evaluation</h3>
 
 <script>
     var relation = { "hasSubclass" : [ "various", "different", "types", "kinds", "numerous", "many", "several", "subclasses"],
-                    "hasApplication" : [ "apply", "application", "use", "using", "applications"],
+                    "hasApplication" : [ "apply", "application", "applications"],
                     "hasOperation" : [ "operation", "methods of", "operations"],
                     "hasRepresentation" : [ "represent", "represents", "represented", "representation", "representations"]
                     };
-
-    var rel = "";
 
     var data = { getUserDataFromSession: function() {
                     var userData = window.sessionStorage.getItem('userObject');
@@ -110,10 +130,11 @@
         lo.cogn = "{{ elem.cognitive }}";
         var lconc_extr = [];
         var q_map = [];
+        var rel = "";
     </script>
     {% for i in elem.concepts %}
         <script>
-            var rel = getRelations("{{ i }}");
+            rel = getRelations("{{ i }}");
             var x = getConcepts("{{ i }}", rel);
             if(x != undefined) {
                 for (var n=0 ; n<x.length ; n++) {
@@ -125,6 +146,7 @@
     {% endfor %}
     <script>
         lo.conc = lconc_extr;
+        lo.conc = Array.from(new Set(lo.conc));
         lo.q_map = q_map;
         lo_ques.los.push(lo);
     </script>
@@ -137,10 +159,11 @@
         que.cogn = "{{ elem.cognitive }}";
         var qconc_extr = [];
         var lo_map = [];
+        var rel = "";
     </script>
     {% for i in elem.concepts %}
         <script>
-            var rel = getRelations("{{ i }}");
+            rel = getRelations("{{ i }}");
             var x = getConcepts("{{ i }}", rel);
             if(x != undefined) {
                 for (var n=0 ; n<x.length ; n++) {
@@ -152,13 +175,13 @@
     {% endfor %}
     <script>
         que.conc = qconc_extr;
+        que.conc = Array.from(new Set(que.conc));
         que.lo_map = lo_map;
         lo_ques.questions.push(que);
     </script>
 {% endfor %}
 
 <script>
-
     function getCognitive_level(cogn) {
         level = 0;
         switch(cogn) {
@@ -209,107 +232,113 @@
     }
 </script>
 
-<h3>LO details:</h3>
-<table border="1">
-    <tr>
-        <th>LO No.</th>
-        <th>Cognitive Level</th>
-        <th>Concepts</th>
-    </tr>
-        <script>
-            for(var i=0; i<lo_ques.los.length ; i++) {
-                document.write("<tr><td>LO"+lo_ques.los[i].l_id+"</td><td>"+lo_ques.los[i].cogn+"</td><td>"+lo_ques.los[i].conc+"</td></tr>");
-            }
-        </script>
-</table>
-
-<br>
-
-<h3>Question details:</h3>
-<table border="1">
-    <tr>
-        <th>Question No.</th>
-        <th>Cognitive<br> Level</th>
-        <th>Concepts</th>
-    </tr>
-        <script>
-            for(var i=0; i<lo_ques.questions.length ; i++) {
-                document.write("<tr><td>Q"+lo_ques.questions[i].q_id+"</td><td>"+lo_ques.questions[i].cogn+"</td><td>"+lo_ques.questions[i].conc+"</td></tr>");
-            }
-        </script>
-</table>
-
-<br>
-
-<h3>LOs and Questions mapping:</h3>
-<table border="1">
-    <tr>
-        <th>LOs</th>
-        <th>Cognitive Level of the LO</th>
-        <th>Concepts involved in the LO</th>
-        <th>Questions covered by LO</th>
-        <th>Cognitive Level of the Question</th>
-        <th>Concepts involved in the Question</th>
-        <th>Content Alignment Score with respect to LO</th>
-        <th>Cognitive Level Alignment Score with respect to LO</th>
-    </tr>
-        <script>
-            var final_cogn_score = 0;
-            for(var i=0; i<lo_ques.los.length ; i++) {
-                var row_len = 1;
-                if(lo_ques.los[i].q_map.length > 0) {
-                    row_len = lo_ques.los[i].q_map.length;
+<div class="page-content">
+    <h3>LO details:</h3>
+    <table border="1">
+        <tr>
+            <th>LO No.</th>
+            <th>Cognitive Level</th>
+            <th>Concepts</th>
+        </tr>
+            <script>
+                for(var i=0; i<lo_ques.los.length ; i++) {
+                    document.write("<tr><td>LO"+lo_ques.los[i].l_id+"</td><td>"+lo_ques.los[i].cogn+"</td><td>"+lo_ques.los[i].conc+"</td></tr>");
                 }
+            </script>
+    </table>
 
-                document.write("<tr><td rowspan="+row_len+">LO"+lo_ques.los[i].l_id+"</td>");
-                document.write("<td rowspan="+row_len+">"+lo_ques.los[i].cogn+"</td>");
-                document.write("<td rowspan="+row_len+">"+lo_ques.los[i].conc+"</td>");
-                max_cogn_score = 0;
+    <br>
 
-                if(lo_ques.los[i].q_map.length > 0) {
+    <h3>Question details:</h3>
+    <table border="1">
+        <tr>
+            <th>Question No.</th>
+            <th>Cognitive<br> Level</th>
+            <th>Concepts</th>
+        </tr>
+            <script>
+                for(var i=0; i<lo_ques.questions.length ; i++) {
+                    document.write("<tr><td>Q"+lo_ques.questions[i].q_id+"</td><td>"+lo_ques.questions[i].cogn+"</td><td>"+lo_ques.questions[i].conc+"</td></tr>");
+                }
+            </script>
+    </table>
 
-                    for(var j=0; j<lo_ques.los[i].q_map.length ; j++) {
+    <br>
 
-                        conc_score = 0;
-
-                        cl_cq = lo_ques.los[i].q_map[j].common_conc.length;
-                        cl_ncq = lo_ques.los[i].conc.length - lo_ques.los[i].q_map[j].common_conc.length;
-
-                        document.write("<td>Q"+lo_ques.los[i].q_map[j].q_no+"</td>");
-
-                        if(lo_ques.los[i].q_map[j].cogn_score > max_cogn_score) {
-                            max_cogn_score = lo_ques.los[i].q_map[j].cogn_score;
-                        }
-                        for(var k=0; k<lo_ques.questions.length ; k++) {
-                            if(lo_ques.los[i].q_map[j].q_no == lo_ques.questions[k].q_id) {
-                                cq_ncl = lo_ques.questions[k].conc.length - lo_ques.los[i].q_map[j].common_conc.length;
-
-                                document.write("<td>"+lo_ques.questions[k].cogn+"</td><td>"+lo_ques.questions[k].conc+"</td>");
-                            }
-                        }
-                        conc_score = cl_cq/(cl_cq + cl_ncq + cq_ncl);
-                        if(!Number.isInteger(conc_score)) {
-                            conc_score = conc_score.toFixed(4);
-                        }
-                        lo_ques.los[i].q_map[j].conc_score = conc_score;
-                        document.write("<td>"+conc_score+"</td><td>"+lo_ques.los[i].q_map[j].cogn_score+"</td></tr>");
+    <h3>LOs and Questions mapping:</h3>
+    <table border="1">
+        <tr>
+            <th>LOs</th>
+            <th>Cognitive Level of the LO</th>
+            <th>Concepts involved in the LO</th>
+            <th>Questions covered by LO</th>
+            <th>Cognitive Level of the Question</th>
+            <th>Concepts involved in the Question</th>
+            <th>Content Alignment Score with respect to LO</th>
+            <th>Cognitive Level Alignment Score with respect to LO</th>
+        </tr>
+            <script>
+                var final_cogn_score = 0;
+                for(var i=0; i<lo_ques.los.length ; i++) {
+                    var row_len = 1;
+                    if(lo_ques.los[i].q_map.length > 0) {
+                        row_len = lo_ques.los[i].q_map.length;
                     }
 
+                    document.write("<tr><td rowspan="+row_len+">LO"+lo_ques.los[i].l_id+"</td>");
+                    document.write("<td rowspan="+row_len+">"+lo_ques.los[i].cogn+"</td>");
+                    document.write("<td rowspan="+row_len+">"+lo_ques.los[i].conc+"</td>");
+                    max_cogn_score = 0;
+
+                    if(lo_ques.los[i].q_map.length > 0) {
+
+                        for(var j=0; j<lo_ques.los[i].q_map.length ; j++) {
+
+                            conc_score = 0;
+
+                            cl_cq = lo_ques.los[i].q_map[j].common_conc.length;
+                            cl_ncq = lo_ques.los[i].conc.length - lo_ques.los[i].q_map[j].common_conc.length;
+
+                            document.write("<td>Q"+lo_ques.los[i].q_map[j].q_no+"</td>");
+
+                            if(lo_ques.los[i].q_map[j].cogn_score > max_cogn_score) {
+                                max_cogn_score = lo_ques.los[i].q_map[j].cogn_score;
+                            }
+                            for(var k=0; k<lo_ques.questions.length ; k++) {
+                                if(lo_ques.los[i].q_map[j].q_no == lo_ques.questions[k].q_id) {
+                                    cq_ncl = lo_ques.questions[k].conc.length - lo_ques.los[i].q_map[j].common_conc.length;
+
+                                    document.write("<td>"+lo_ques.questions[k].cogn+"</td><td>"+lo_ques.questions[k].conc+"</td>");
+                                }
+                            }
+                            conc_score = cl_cq/(cl_cq + cl_ncq + cq_ncl);
+                            if(!Number.isInteger(conc_score)) {
+                                conc_score = conc_score.toFixed(4);
+                            }
+                            lo_ques.los[i].q_map[j].conc_score = conc_score;
+                            document.write("<td>"+conc_score+"</td><td>"+lo_ques.los[i].q_map[j].cogn_score+"</td></tr>");
+                        }
+
+                    }
+                    else {
+
+                        document.write("<td></td><td></td><td></td><td></td><td></td></tr>");
+                    }
+                    final_cogn_score = final_cogn_score + max_cogn_score;
                 }
-                else {
-
-                    document.write("<td></td><td></td><td></td><td></td><td></td></tr>");
+                final_cogn_score = final_cogn_score/(lo_ques.los.length);
+                if(!Number.isInteger(final_cogn_score)) {
+                    final_cogn_score = final_cogn_score.toFixed(4);
                 }
-                final_cogn_score = final_cogn_score + max_cogn_score;
-            }
-            final_cogn_score = final_cogn_score/(lo_ques.los.length);
 
-        </script>
-</table>
+            </script>
+    </table>
 
-<p id="concept_score"><b>Concept Alignment Score of the Question paper:   </b></p>
-<p id="cognitive_score"><b>Cognitive Level Alignment Score of the Question paper:   </b></p>
-<br>
+    <p id="concept_score"><b>Concept Alignment Score of the Question paper:   </b></p>
+    <p id="cognitive_score"><b>Cognitive Level Alignment Score of the Question paper:   </b></p><br>
+    <p id="q_not_covered">Questions not covered by any of the concepts in syllabus: </p><br>
+    <a class="mapped_onto" href="{% url 'details' %}">Mapped Ontology</a>
+</div>
 
 <script>
 
@@ -415,14 +444,21 @@
         sum = sum+(lo_conc_score);
     }
     final_conc_score = (sum*100)/(lo_ques.los.length);
+    if(!Number.isInteger(final_conc_score)) {
+        final_conc_score = final_conc_score.toFixed(4);
+    }
 
     document.getElementById("concept_score").innerHTML += final_conc_score+"%";
     document.getElementById("cognitive_score").innerHTML += final_cogn_score+"%";
 
+    for(i=0 ; i<lo_ques.questions.length ; i++) {
+        if(lo_ques.questions[i].conc.length == 0) {
+            document.getElementById("q_not_covered").innerHTML += "  Q"+lo_ques.questions[i].q_id;
+        }
+    }
+
     jsonObj1 = JSON.stringify(jsonObj);
     window.sessionStorage.setItem('userOnto',jsonObj1);
 </script>
-
-<a class="mapped_onto" href="{% url 'details' %}">Mapped Ontology</a>
 
 {% endblock %}

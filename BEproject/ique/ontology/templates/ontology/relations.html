@@ -1,6 +1,28 @@
 {% extends "ontology/header.html" %}
 
+{% block title %} Make Ontology {% endblock %}
+
 {% block content %}
+
+<div class="topnav">
+    <a  href="/iquee/index">Home</a>
+    <a href="/iquee/documentation">Documentation</a>
+    <a href="/iquee/contact">Contact Us</a>
+    <a class="active" href="">Evaluation</a>
+
+    <div class="topnav-right">
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <script>
+                alert("Please Login or Register!");
+                window.location.href="/iquee/index/";
+            </script>
+        {% endif %}
+    </div>
+</div>
+
+<h3>Course Details</h3>
 
 <script>
     var n_id = 0;
@@ -9,79 +31,75 @@
                 "edges": []
             };
 </script>
+
 {% for item in nodes %}
-<script>
-
-     var nodes = {};
-     nodes.node_id = n_id;
-     nodes.name = "{{ item }}".toLowerCase();
-     nodes.synonym = "";
-     dataset.nodes.push(nodes);
-     n_id++;
-
-
-</script>
+    <script>
+         var nodes = {};
+         nodes.node_id = n_id;
+         nodes.name = "{{ item }}".toLowerCase();
+         nodes.synonym = "";
+         dataset.nodes.push(nodes);
+         n_id++;
+    </script>
 {% endfor %}
 
+<div class="page-content">
+    <form method="POST" enctype="multipart/form-data" class = "main1" id = "form1">
+        <b>Enter node details:</b>
+        <br>
+        <div class = "block" id = "node_1">
+            Node name(concept):<select name = "name">
+            <option disabled selected value style="display:none">--Select a node--</option>
+                {% for item in nodes %}
+                    <option value = "{{ item }}" >{{ item }}</option>
+                {% endfor %}
+            </select>
 
+            Synonyms: <input type = "text" name="synonym">
+            <br><br>
+        </div>
 
-<form method="POST" enctype="multipart/form-data" class = "main1" id = "form1">
-    <b>Enter node details:</b>
-    <br>
-    <div class = "block" id = "node_1">
-        Node name(concept):<select name = "name">
-            {% for item in nodes %}
-                <option value = "{{ item }}" >{{ item }}</option>
-            {% endfor %}
-        </select>
+        <div class="del" > Delete</div>
+        <div class = "add-more">Add synonyms</div>
+        <hr>
+    </form>
 
-        Synonyms: <input type = "text" name="synonym">
-    </div>
+    <form method="POST" enctype="multipart/form-data" class = "main2" id = "form2">
+        <b>Enter relation details:</b>
+        <br>
+        <div class = "rell" id = "rel_1" >
+            Enter source node:<select name = "source">
+            <option disabled selected value style="display:none">--Select a node--</option>
+                {% for item in nodes %}
+                    <option value = "{{ item }}">{{ item }}</option>
+                {% endfor %}
+            </select>
 
-    <div class="del" > Delete</div>
-    <div class = "add-more">Add synonyms</div>
-    <hr>
-</form>
+            Enter outgoing relations:<select name = "relation">
+                <option disabled selected value style="display:none">--Select relation--</option>
+                <option value = "hasSubclass">hasSubclass</option>
+                <option value = "hasApplication">hasApplication</option>
+                <option value = "hasRepresentation">hasRepresentation</option>
+                <option value = "hasOperation">hasOperation</option>
+                <option value = "isA">isA</option>
+            </select>
 
-<form method="POST" enctype="multipart/form-data" class = "main2" id = "form2">
-    <b>Enter relation details:</b>
-    <br>
-    <div class = "rell" id = "rel_1" >
-        Enter source node:<select name = "source">
-            {% for item in nodes %}
-                <option value = "{{ item }}">{{ item }}</option>
-            {% endfor %}
-        </select>
+            Enter destination node:<select name = "destination">
+            <option disabled selected value style="display:none">--Select a node--</option>
+                {% for item in nodes %}
+                    <option value = "{{ item }}">{{ item }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+        </div>
 
-        Enter outgoing relations:<select name = "relation">
-            <option value = "hasSubclass">hasSubclass</option>
-            <option value = "hasApplication">hasApplication</option>
-            <option value = "hasRepresentation">hasRepresentation</option>
-            <option value = "hasOperation">hasOperation</option>
-            <option value = "isA">isA</option>
-        </select>
+        <div class="del2" > Delete</div>
+        <div class = "add-rell">Add more relations</div>
+        <br><br>
+    </form>
 
-        Enter destination node:<select name = "destination">
-            {% for item in nodes %}
-                <option value = "{{ item }}">{{ item }}</option>
-            {% endfor %}
-        </select>
-    </div>
-
-    <div class="del2" > Delete</div>
-    <div class = "add-rell">Add more relations</div>
-    <br><br>
-</form>
-
-<a class= "make_onto" href="{% url 'graph' %}" >Make ontology</a>
-
-<p id="hey"></p>
-
-<script>
-   // document.getElementById("hey").innerHTML = JSON.stringify(dataset);
-</script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <a class= "make_onto" href="{% url 'graph' %}" >Make ontology</a>
+</div>
 
 <script type = "text/javascript">
 
@@ -99,11 +117,8 @@
                 $element_to_clone = $self.prev().prev(),
                 $new_element = $element_to_clone.clone();
             $($new_element).attr("id", 'node_' + node_count);
-
             $self.prev().show();
-
             $new_element.insertAfter($element_to_clone).find("input[type='text']").val("");
-
             return false;
         });
 
@@ -114,7 +129,6 @@
                 $new_element = $element_to_clone.clone();
             $($new_element).attr("id", 'edge_' + edge_count);
             $self.prev().show();
-
             $new_element.insertAfter($element_to_clone).find("input[type='text']").val("");
             return false;
         });
@@ -123,25 +137,19 @@
             var $self = $(this),
             $element_to_remove = $self.prev();
             $element_to_remove.remove();
-
         });
 
         $(".del2").click(function() {
             var $self = $(this),
             $element_to_remove = $self.prev();
             $element_to_remove.remove();
-
         });
 
         $(".make_onto").click(function() {
-
             var formData1 = JSON.stringify($("#form1").serializeArray());
             var formData2 = JSON.stringify($("#form2").serializeArray());
             var myData1 = JSON.parse(formData1);
             var myData2 = JSON.parse(formData2);
-
-
-
 
             for (var i = 0; i < myData1.length; i++) {
                 if(i%2==0) {
@@ -174,10 +182,7 @@
             jsonObj = JSON.stringify(dataset);
             //document.getElementById("hey").innerHTML = jsonObj;
             storeUserDataInSession(jsonObj);
-
         });
-
-
     });
 </script>
 

@@ -1,13 +1,13 @@
 {% extends "ontology/header.html" %}
 
-{% block title %} Question Quality Evaluator {% endblock %}
+{% block title %} Contacts {% endblock %}
 
 {% block content %}
 
 <div class="topnav">
-    <a class="active" href="/iquee/index">Home</a>
+    <a href="/iquee/index">Home</a>
     <a href="/iquee/documentation">Documentation</a>
-    <a href="/iquee/contact">Contact Us</a>
+    <a class="active" href="">Contact Us</a>
 
     {% if user.is_authenticated %}
         <a class="eval" href="/iquee/home">Evaluate</a>
@@ -31,7 +31,7 @@
     {% endif %}
 </div>
 
-<h1>Question Quality Evaluator</h1>
+<h2>Contacts..</h2>
 
 <div class="page-content"></div>
 

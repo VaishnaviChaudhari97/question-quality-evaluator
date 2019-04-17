@@ -3,12 +3,14 @@ from textblob import TextBlob
 
 def get_cognitive(file):
     lostag = file.split('\n')
+    lostag = list(filter(None, lostag))
+    lostag = [name for name in lostag if name.strip()]
 
     recall = ["state", "choose", "define", "how", "label", "list", "match", "name", "omit", "recall", "relate",
               "select", "show", "spell", "tell", "what", "when", "where", "which", "who", "why"]
     understand = ["classify", "contrast", "describe", "demonstrate", "discuss", "explain", "extend", "illustrate",
                   "infer", "interpret", "outline", "relate", "rephrase", "show", "summarize", "translate", "understand"]
-    apply = ["Hash", "Write", "application", "apply", "append", "build", "choose", "construct", "create", "delete",
+    apply = ["application", "apply", "append", "build", "choose", "construct", "create", "delete",
              "develop", "display", "experiment with", "identify", "implement", "insert", "interview", "print",
              "merge", "organize", "plan", "perform", "program", "select", "solve", "sort", "traverse", "use", "utilize",
              "find", "calculate", "write"]
@@ -55,6 +57,8 @@ def get_cognitive(file):
 
 def get_concepts(file):
     blob = file.split("\n")
+    blob = list(filter(None, blob))
+    blob = [name for name in blob if name.strip()]
 
     b = []  # los in a list
     for lo in blob:
@@ -63,7 +67,7 @@ def get_concepts(file):
     def concept_extr(temp):
         temp1=TextBlob(temp)
         sample = []
-        for i in range(4):
+        for i in range(5):
             for ngram in temp1.ngrams(i):
                  sample.append(" ".join(ngram))
                  sample.append(" ".join(ngram.lemmatize()))

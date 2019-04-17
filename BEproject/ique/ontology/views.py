@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.views.generic import View
 import json
 from . import extraction
-from .forms import UserForm, LoginForm
+from .forms import UserForm
 
 
 def index(request):
@@ -42,6 +42,14 @@ def home(request):
     return render(request, 'ontology/home.html')
 
 
+def documentation(request):
+    return render(request, 'ontology/documentation.html')
+
+
+def contact(request):
+    return render(request, 'ontology/contact.html')
+
+
 def ontologies(request):
     return render(request, 'ontology/ontologies.html')
 
@@ -53,6 +61,9 @@ def accept(request):
 def relations(request):
     with request.FILES["concepts"] as f:
         nodes = f.read().decode("utf-8").splitlines()
+        nodes = list(dict.fromkeys(nodes))
+        nodes = list(filter(None, nodes))
+        nodes = [name for name in nodes if name.strip()]
     return render(request, 'ontology/relations.html', {'nodes': nodes})
 
 

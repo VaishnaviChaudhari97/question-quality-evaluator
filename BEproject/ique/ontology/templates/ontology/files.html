@@ -1,15 +1,39 @@
 {% extends "ontology/header.html" %}
 
+{% block title %} File Upload {% endblock %}
+
 {% block content %}
 
-<form method="POST" enctype="multipart/form-data" action = "/iquee/evaluation/">
-    {% csrf_token %}
-    Insert LOs file :<input type="file" name="LO_file">
-    <br>
-    Insert Questions file :<input type="file" name="questions_file">
-    <br>
-    <button type="submit">Submit</button>
-    <br>
-</form>
+<div class="topnav">
+    <a  href="/iquee/index">Home</a>
+    <a href="/iquee/documentation">Documentation</a>
+    <a href="/iquee/contact">Contact Us</a>
+    <a class="active" href="">Evaluation</a>
+
+    <div class="topnav-right">
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <script>
+                alert("Please Login or Register!");
+                window.location.href="/iquee/index/";
+            </script>
+        {% endif %}
+    </div>
+</div>
+
+<h3>Upload Files!</h3>
+
+<div class="page-content">
+    <form method="POST" enctype="multipart/form-data" action = "/iquee/evaluation/">
+        {% csrf_token %}
+        Insert LOs file :<input type="file" name="LO_file">
+        <br>
+        Insert Questions file :<input type="file" name="questions_file">
+        <br>
+        <button type="submit">Submit</button>
+        <br>
+    </form>
+</div>
 
 {% endblock %}

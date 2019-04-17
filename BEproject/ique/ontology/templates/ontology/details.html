@@ -1,9 +1,35 @@
 {% extends "ontology/header.html" %}
 
+{% block title %} Mapped Ontology {% endblock %}
+
 {% block content %}
 
-<div class="display"></div>
-<p id="test"></p>
+<div class="topnav">
+    <a  href="/iquee/index">Home</a>
+    <a href="/iquee/documentation">Documentation</a>
+    <a href="/iquee/contact">Contact Us</a>
+    <a class="active" href="">Evaluation</a>
+
+    <div class="topnav-right">
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <script>
+                alert("Please Login or Register!");
+                window.location.href="/iquee/index/";
+            </script>
+        {% endif %}
+    </div>
+</div>
+
+<h3>Content Coverage</h3>
+
+<div class="page-content">
+    <p>Drag a node to pin it down. Doubleclick to release it. Hover over the node for details</p>
+    <div class="display"></div>
+    <p id="test"></p>
+    <a href="/iquee/index/">Home</a>
+</div>
 
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script type='text/javascript' src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"> </script>
@@ -14,16 +40,14 @@
                     return JSON.parse(userData);
                 }
             }
-
     var dataset=data1.getOntoFromSession();
     //document.getElementById("test").innerHTML = JSON.stringify(dataset);
 
+    //Graph
     var w = 1500;
     var h = 1000;
     var linkDistance=150;
-
     var colors = d3.scale.category10();
-
     var svg = d3.select(".display").append("svg").attr({"width":w,"height":h});
 
     var tip = d3.tip()
@@ -33,13 +57,13 @@
         var det = "LOs: <br>";
         if(d.lo_cognitives.length > 0) {
             for(var i=0 ; i<d.lo_cognitives.length ; i++) {
-                 det += d.lo_cognitives[i].id+"-"+d.lo_cognitives[i].level+"<br>";
+                 det += "LO"+d.lo_cognitives[i].id+"-"+d.lo_cognitives[i].level+"<br>";
             }
         }
         det += "<br> Questions: <br>";
         if(d.que_cognitives.length > 0) {
             for(var i=0 ; i<d.que_cognitives.length ; i++) {
-                 det += d.que_cognitives[i].id+"-"+d.que_cognitives[i].level+"<br>";
+                 det += "Q"+d.que_cognitives[i].id+"-"+d.que_cognitives[i].level+"<br>";
             }
         }
         return det;
@@ -56,6 +80,27 @@
         .gravity(0.05)
         .start();
 
+    var node_drag = d3.behavior.drag()
+                .on("dragstart", dragstart)
+                .on("drag", dragmove)
+                .on("dragend", dragend);
+            function dragstart(d, i) {
+                force.stop() // stops the force auto positioning before you start dragging
+            }
+            function dragmove(d, i) {
+                d.px += d3.event.dx;
+                d.py += d3.event.dy;
+                d.x += d3.event.dx;
+                d.y += d3.event.dy;
+            }
+            function dragend(d, i) {
+                d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
+                force.resume();
+            }
+            function releasenode(d) {
+                d.fixed = false; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
+                //force.resume();
+            }
 
     var edges = svg.selectAll("line")
       .data(dataset.edges)
@@ -81,8 +126,9 @@
                 })
       .call(force.drag)
       .on("mouseover", tip.show)
-      .on("mouseout", tip.hide);
-
+      .on("mouseout", tip.hide)
+      .on('dblclick', releasenode)
+      .call(node_drag);
 
     var nodelabels = svg.selectAll(".nodelabel")
        .data(dataset.nodes)
@@ -125,7 +171,6 @@
         .style("pointer-events", "none")
         .text(function(d){return d.relation});
 
-
     svg.append('defs').append('marker')
         .attr({'id':'arrowhead',
                'viewBox':'-0 -5 10 10',
@@ -141,15 +186,12 @@
             .attr('fill', '#ccc')
             .attr('stroke','#ccc');
 
-
     force.on("tick", function(){
-
         edges.attr({"x1": function(d){return d.source.x;},
                     "y1": function(d){return d.source.y;},
                     "x2": function(d){return d.target.x;},
                     "y2": function(d){return d.target.y;}
         });
-
         nodes.attr({"cx":function(d){return d.x;},
                     "cy":function(d){return d.y;}   });
 
@@ -166,14 +208,12 @@
                 rx = bbox.x+bbox.width/2;
                 ry = bbox.y+bbox.height/2;
                 return 'rotate(180 '+rx+' '+ry+')';
-                }
+            }
             else {
                 return 'rotate(0)';
-                }
+            }
         });
     });
-
 </script>
-
 
 {% endblock %}

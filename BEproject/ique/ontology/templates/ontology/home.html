@@ -1,8 +1,31 @@
 {% extends "ontology/header.html" %}
 
+{% block title %} Home {% endblock %}
+
 {% block content %}
 
-<a href="{% url 'ontologies' %}">Use existing ontology</a><br><br>
-<a href="{% url 'accept' %}">Create Ontology</a>
+<div class="topnav">
+    <a  href="/iquee/index">Home</a>
+    <a href="/iquee/documentation">Documentation</a>
+    <a href="/iquee/contact">Contact Us</a>
+    <a class="active" href="">Evaluation</a>
 
+    <div class="topnav-right">
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <script>
+                alert("Please Login or Register!");
+                window.location.href="/iquee/index/";
+            </script>
+        {% endif %}
+    </div>
+</div>
+
+<h3>Choose from the following options</h3>
+
+<div class="page-content">
+    <a href="{% url 'ontologies' %}">Use existing ontology</a><br>
+    <a href="{% url 'accept' %}">Create Ontology</a>
+</div>
 {% endblock %}

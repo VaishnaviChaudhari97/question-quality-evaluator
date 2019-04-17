@@ -1,32 +1,56 @@
 {% extends "ontology/header.html" %}
 
+{% block title %} Graphical Representation {% endblock %}
+
 {% block content %}
 
-<p id="json"></p>
-<div class="graph"></div>
-<a class="next" href="{% url 'files' %}" >Next</a>
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script>
+<div class="topnav">
+    <a  href="/iquee/index">Home</a>
+    <a href="/iquee/documentation">Documentation</a>
+    <a href="/iquee/contact">Contact Us</a>
+    <a class="active" href="">Evaluation</a>
 
+    <div class="topnav-right">
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <script>
+                alert("Please Login or Register!");
+                window.location.href="/iquee/index/";
+            </script>
+        {% endif %}
+    </div>
+</div>
+
+<h3>Verify the Ontology</h3>
+
+<div class="page-content">
+    <p>Drag a node to pin it down. Doubleclick to release it</p>
+    {% csrf_token %}
+    <p id="json"></p>
+    <div class="graph"></div>
+    <a class="next" href="{% url 'files' %}" >Proceed</a><br>
+</div>
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<script>
     var data = { getUserData1FromSession: function() {
                     var userData = window.sessionStorage.getItem('userObject');
                     return JSON.parse(userData);
                 }
             }
-
     var dataset=data.getUserData1FromSession();
     //document.getElementById("json").innerHTML = JSON.stringify(dataset);
 
-                //Creating graph using d3 force layout
-            var w = 1500;
-            var h = 1000;
-            var linkDistance=150;
+    //Creating graph using d3 force layout
+    var w = 1700;
+    var h = 1800;
+    var linkDistance=150;
+    var colors = d3.scale.category10();
+    var svg = d3.select(".graph").append("svg").attr({"width":w,"height":h});
 
-            var colors = d3.scale.category10();
-
-            var svg = d3.select(".graph").append("svg").attr({"width":w,"height":h});
-
-            var force = d3.layout.force()
+    var force = d3.layout.force()
                 .nodes(dataset.nodes)
                 .links(dataset.edges)
                 .size([w,h])
@@ -36,7 +60,31 @@
                 .gravity(0.05)
                 .start();
 
-            var edges = svg.selectAll("line")
+
+    var node_drag = d3.behavior.drag()
+                .on("dragstart", dragstart)
+                .on("drag", dragmove)
+                .on("dragend", dragend);
+
+    function dragstart(d, i) {
+        force.stop() // stops the force auto positioning before you start dragging
+    }
+    function dragmove(d, i) {
+        d.px += d3.event.dx;
+        d.py += d3.event.dy;
+        d.x += d3.event.dx;
+        d.y += d3.event.dy;
+    }
+    function dragend(d, i) {
+        d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
+        force.resume();
+    }
+    function releasenode(d) {
+        d.fixed = false; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
+        //force.resume();
+    }
+
+    var edges = svg.selectAll("line")
               .data(dataset.edges)
               .enter()
               .append("line")
@@ -45,7 +93,7 @@
               .style("stroke","#ccc")
               .style("pointer-events", "none");
 
-            var nodes = svg.selectAll(".nodes")
+    var nodes = svg.selectAll(".nodes")
               .data(dataset.nodes)
               .enter()
               .append("circle")
@@ -53,9 +101,10 @@
               .attr({"r":15})
               .style("fill",function(d,i){return '#f4c2c2';})
               .call(force.drag)
+              .on('dblclick', releasenode)
+              .call(node_drag);
 
-
-            var nodelabels = svg.selectAll(".nodelabel")
+    var nodelabels = svg.selectAll(".nodelabel")
                .data(dataset.nodes)
                .enter()
                .append("text")
@@ -64,7 +113,7 @@
                       "class":"nodelabel"})
                .text(function(d){return d.name;});
 
-            var edgepaths = svg.selectAll(".edgepath")
+    var edgepaths = svg.selectAll(".edgepath")
                 .data(dataset.edges)
                 .enter()
                 .append('path')
@@ -77,7 +126,7 @@
                        'id':function(d,i) {return 'edgepath'+i}})
                 .style("pointer-events", "none");
 
-            var edgelabels = svg.selectAll(".edgelabel")
+    var edgelabels = svg.selectAll(".edgelabel")
                 .data(dataset.edges)
                 .enter()
                 .append('text')
@@ -89,13 +138,13 @@
                        'font-size':15,
                        'fill':'#aaa'});
 
-            edgelabels.append('textPath')
+    edgelabels.append('textPath')
                 .attr('xlink:href',function(d,i) {return '#edgepath'+i})
                 .style("pointer-events", "none")
                 .text(function(d){return d.relation});
 
 
-            svg.append('defs').append('marker')
+    svg.append('defs').append('marker')
                 .attr({'id':'arrowhead',
                        'viewBox':'-0 -5 10 10',
                        'refX':25,
@@ -110,39 +159,34 @@
                     .attr('fill', '#ccc')
                     .attr('stroke','#ccc');
 
-
-            force.on("tick", function(){
-
-                edges.attr({"x1": function(d){return d.source.x;},
+    force.on("tick", function(){
+        edges.attr({"x1": function(d){return d.source.x;},
                             "y1": function(d){return d.source.y;},
                             "x2": function(d){return d.target.x;},
                             "y2": function(d){return d.target.y;}
-                });
-
-                nodes.attr({"cx":function(d){return d.x;},
+        });
+        nodes.attr({"cx":function(d){return d.x;},
                             "cy":function(d){return d.y;}
-                });
-
-                nodelabels.attr("x", function(d) { return d.x; })
+        });
+        nodelabels.attr("x", function(d) { return d.x; })
                           .attr("y", function(d) { return d.y; });
 
-                edgepaths.attr('d', function(d) { var path='M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y;
+        edgepaths.attr('d', function(d) { var path='M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y;
                                                    //console.log(d)
                                                    return path});
 
-                edgelabels.attr('transform',function(d,i){
+        edgelabels.attr('transform',function(d,i){
                     if (d.target.x<d.source.x){
                         bbox = this.getBBox();
                         rx = bbox.x+bbox.width/2;
                         ry = bbox.y+bbox.height/2;
                         return 'rotate(180 '+rx+' '+ry+')';
-                        }
+                    }
                     else {
                         return 'rotate(0)';
-                        }
-                });
-            });
-
+                    }
+        });
+    });
 </script>
 
 {% endblock %}
